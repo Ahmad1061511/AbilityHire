@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In - AbilityHire</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background-color: #f4f7fc;
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;
+      background: linear-gradient(135deg, #0077b6, #0096c7);
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .language-btns button,
+    #darkModeBtn {
+      background-color: #48cae4;
+      color: white;
+      border-radius: 5px;
+      padding: 10px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .language-btns button:hover,
+    #darkModeBtn:hover {
+      background-color: #0096c7;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 10%;
+    }
+    .left-panel {
+      width: 30%;
+      height: 350px;
+      background: url('https://source.unsplash.com/400x400/?team,work') no-repeat center/cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: #a8dadc;
+    }
+    .content {
+      text-align: center;
+      width: 40%;
+    }
+    .content h1 {
+      font-size: 2rem;
+      color: #023e8a;
+      font-weight: bold;
+    }
+    .content input {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .buttons button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      margin: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    .btn-signin {
+      background: #0077b6;
+      color: white;
+    }
+    .btn-signin:hover {
+      background: #005b96;
+      transform: scale(1.05);
+    }
+    .btn-back {
+      background: #48cae4;
+      color: white;
+    }
+    .btn-back:hover {
+      background: #0096c7;
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #333;
+      color: white;
+      margin-top: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    body.dark-mode {
+      background-color: #121212;
+      color: #f4f7fc;
+    }
+    header.dark-mode,
+    footer.dark-mode {
+      background: #1e1e1e;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">AbilityHire</div>
+    <div class="language-btns">
+      <button onclick="changeLanguage('en')">English</button>
+      <button onclick="changeLanguage('ar')">عربي</button>
+      <button id="darkModeBtn" onclick="toggleDarkMode()">🌙</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="left-panel"></div>
+    <div class="content">
+      <h1 id="signin-text">Sign In</h1>
+      <form action="home.html" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required />
+        <input type="password" name="password" placeholder="Enter your password" required />
+        <div class="buttons">
+          <button class="btn-signin" type="submit">Sign In</button>
+          <button class="btn-back" onclick="window.location.href='HomePage.html.html'">Back to Home</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <footer>&copy; 2025 AbilityHire. All rights reserved.</footer>
+  <script>
+    function changeLanguage(language) {
+      localStorage.setItem('preferredLanguage', language);
+      if (language === 'ar') {
+        document.getElementById('signin-text').textContent = 'تسجيل الدخول';
+        document.querySelector('.btn-signin').textContent = 'تسجيل الدخول';
+        document.querySelector('.btn-back').textContent = 'العودة إلى الصفحة الرئيسية';
+      } else {
+        document.getElementById('signin-text').textContent = 'Sign In';
+        document.querySelector('.btn-signin').textContent = 'Sign In';
+        document.querySelector('.btn-back').textContent = 'Back to Home';
+      }
+    }
+    function toggleDarkMode() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      document.querySelector('header').classList.toggle('dark-mode');
+      document.querySelector('footer').classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+    }
+    window.onload = function () {
+      const savedLang = localStorage.getItem('preferredLanguage');
+      if (savedLang) changeLanguage(savedLang);
+      const darkPref = localStorage.getItem('darkMode');
+      if (darkPref === 'on') toggleDarkMode();
+    };
+  </script>
+</body>
+</html>

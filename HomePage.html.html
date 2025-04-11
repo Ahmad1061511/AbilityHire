@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AbilityHire</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+    body { background-color: #f4f7fc; color: #333; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; background: linear-gradient(135deg, #0077b6, #0096c7); color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+    .logo { font-size: 2rem; font-weight: bold; }
+    .language-btns button, #darkModeBtn { background-color: #48cae4; color: white; border-radius: 5px; padding: 10px; margin-left: 10px; cursor: pointer; transition: background-color 0.3s; }
+    .language-btns button:hover, #darkModeBtn:hover { background-color: #0096c7; }
+    .container { display: flex; justify-content: space-between; align-items: center; padding: 60px 10%; }
+    .left-panel {
+      width: 30%;
+      height: 350px;
+      background: url('main-page-background.jpg.jpg') no-repeat center/cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: #a8dadc;
+    }
+    .content { text-align: center; width: 40%; }
+    .content h1 { font-size: 2rem; color: #023e8a; font-weight: bold; }
+    .content p { font-size: 1rem; margin: 15px 0; color: #005b96; font-weight: 500; background: #eef7fc; padding: 10px 15px; border-radius: 6px; display: inline-block; }
+    .buttons a { padding: 12px 20px; font-size: 1rem; margin: 10px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s; font-weight: 600; text-decoration: none; display: inline-block; }
+    .btn-signin { background: #0077b6; color: white; }
+    .btn-signin:hover { background: #005b96; transform: scale(1.05); }
+    .btn-create { background: #48cae4; color: white; }
+    .btn-create:hover { background: #0096c7; transform: scale(1.05); }
+    footer { text-align: center; padding: 15px; background: #333; color: white; margin-top: 50px; font-size: 0.9rem; font-weight: 500; }
+    body.dark-mode { background-color: #121212; color: #f4f7fc; }
+    header.dark-mode, footer.dark-mode { background: #1e1e1e; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">AbilityHire</div>
+    <div class="language-btns">
+      <button onclick="changeLanguage('en')">English</button>
+      <button onclick="changeLanguage('ar')">عربي</button>
+      <button id="darkModeBtn" onclick="toggleDarkMode()">🌙</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="left-panel"></div>
+    <div class="content">
+      <h1 id="welcome-text">Welcome to AbilityHire</h1>
+      <p id="description-text">We help you succeed. Join now to utilize your skills and abilities.</p>
+      <div class="buttons">
+        <a href="signin.html.html" class="btn-signin">Sign In</a>
+        <a href="signup.html.html" class="btn-create">Sign Up</a>
+      </div>
+    </div>
+  </div>
+  <footer>&copy; 2025 AbilityHire. All rights reserved.</footer>
+  <script>
+    function changeLanguage(language) {
+      localStorage.setItem('preferredLanguage', language);
+      if (language === 'ar') {
+        document.getElementById('welcome-text').textContent = 'مرحبًا بكم في AbilityHire';
+        document.getElementById('description-text').textContent = 'نحن نساعدك على النجاح. انضم الآن للاستفادة من مهاراتك وقدراتك.';
+        document.querySelector('.btn-signin').textContent = 'تسجيل الدخول';
+        document.querySelector('.btn-create').textContent = 'إنشاء حساب';
+      } else {
+        document.getElementById('welcome-text').textContent = 'Welcome to AbilityHire';
+        document.getElementById('description-text').textContent = 'We help you succeed. Join now to utilize your skills and abilities.';
+        document.querySelector('.btn-signin').textContent = 'Sign In';
+        document.querySelector('.btn-create').textContent = 'Sign Up';
+      }
+    }
+    function toggleDarkMode() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      document.querySelector('header').classList.toggle('dark-mode');
+      document.querySelector('footer').classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+    }
+    window.onload = function () {
+      const savedLang = localStorage.getItem('preferredLanguage');
+      if (savedLang) changeLanguage(savedLang);
+      const darkPref = localStorage.getItem('darkMode');
+      if (darkPref === 'on') toggleDarkMode();
+    };
+  </script>
+</body>
+</html>
